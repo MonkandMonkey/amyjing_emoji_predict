@@ -9,7 +9,7 @@ import src.predict as predict
 
 def main():
     config_log()
-    predict.cls_lstm()
+    train.cls_lstm()
 
 
 if __name__ == "__main__":

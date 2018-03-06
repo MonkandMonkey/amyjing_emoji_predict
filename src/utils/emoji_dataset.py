@@ -9,7 +9,6 @@ Data format:
     X (string): tweet text extract out the emoji
     y (int from 0 to 19): emoji label
 """
-import os
 import re
 import sys
 import json
@@ -43,6 +42,44 @@ def load_json_data(filename):
             texts.append(text)
             labels.append(label)
     return texts, labels
+
+
+def build_tokenizer(data, num_words=None):
+    """Build tokenizer fit on self.train_data.
+    """
+    tokenizer = train_tokenizer(data, num_words=num_words)
+    return tokenizer
+
+
+def texts2indexes(tokenizer, data):
+    """Change word lists to index lists.
+        tokenizer: trained tokenizer (usually trained on train set)
+        data: texts (str list)
+    Returns:
+        index list
+    """
+    idx_list = tokenizer.texts_to_sequences(data)
+    return idx_list
+
+
+def y_to_embedding(emoji_embeddings, ys):
+    """Change emoji label into its corresponding embedding. Used for training
+
+    Args:
+        emoji_embeddings: 20 emojis' embedding matrix
+    Returns:
+        y_train, y_valid
+    """
+    embs = []
+
+    for emoji_idx in ys:
+        try:
+            emb = emoji_embeddings[emoji_idx]
+            embs.append(emb)
+        except KeyError:
+            logging.info("Emoji: {} can't be found!".format(emoji_idx))
+
+    return embs
 
 
 class EmojiDataset(object):
@@ -110,35 +147,6 @@ class EmojiDataset(object):
         return (self.train_data, self.train_target), \
                (self.valid_data, self.valid_target), \
                (self.test_data, self.test_target)
-
-    def y_to_embedding(self, wv):
-        """Change emoji label into its corresponding embedding. Used for training
-
-        Args:
-            wv: gensim word2vec model
-        Returns:
-            y_train, y_valid
-        """
-        y_train, y_valid = [], []
-        if self.train_target is None or self.valid_target is None:
-            raise ValueError("self.train_target, self.valid_target can't be None.")
-
-        for emoji_idx in self.train_target:
-            try:
-                emb = wv[self.idx2emoji[emoji_idx]]
-                y_train.append(emb)
-            except KeyError:
-                logging.info("Emoji: {} can't be found in wv.".format(emoji_idx))
-
-        for emoji_idx in self.valid_target:
-            try:
-                emb = wv[self.idx2emoji[emoji_idx]]
-                y_valid.append(emb)
-            except KeyError:
-                logging.info("Emoji: {} can't be found in wv.".format(emoji_idx))
-
-        self.train_target, self.valid_target = y_train, y_valid
-        return self.train_target, self.valid_target
 
     def build_tokenizer(self):
         """Build tokenizer fit on self.train_data.
