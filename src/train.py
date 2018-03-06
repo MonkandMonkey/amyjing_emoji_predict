@@ -12,7 +12,7 @@ from src.reg_lstm import RegressionLstmModel
 
 def reg_lstm():
     """ regression 2-layer lstm model """
-    model = RegressionLstmModel(opt="origin")
+    model = RegressionLstmModel()
     model.build_model()
     model.plot_model_architecture()
     model.model.summary()
@@ -22,7 +22,7 @@ def reg_lstm():
 
 def reg_bilstm():
     """ regression bilstm model """
-    model = RegressionBilstmModel(opt="origin")
+    model = RegressionBilstmModel()
     model.build_model()
     model.plot_model_architecture()
     model.model.summary()
@@ -32,7 +32,7 @@ def reg_bilstm():
 
 def cls_lstm():
     """ classification 2-layer lstm model """
-    model = ClassificationLstmModel(opt="origin")
+    model = ClassificationLstmModel()
     model.build_model()
     model.plot_model_architecture()
     model.model.summary()
@@ -42,7 +42,7 @@ def cls_lstm():
 
 def cls_bilstm():
     """ regression bilstm model """
-    model = ClassificationBilstmModel(opt="origin")
+    model = ClassificationBilstmModel()
     model.build_model()
     model.plot_model_architecture()
     model.model.summary()
