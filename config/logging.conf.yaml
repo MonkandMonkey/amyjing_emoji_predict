@@ -1,0 +1,50 @@
+formatters:
+  basic:
+    datefmt: '%H:%M:%S'
+    format: '{asctime} [{levelname}] {name} >> {message}'
+    style: '{'
+  detailed:
+    datefmt: '%H:%M:%S'
+    format: '{asctime} [{levelname}] {funcName}:{lineno} >> {message}'
+    style: '{'
+handlers:
+  console:
+    class: logging.StreamHandler
+    formatter: detailed
+    level: DEBUG
+    stream: ext://sys.stdout
+  error_file:
+    backupCount: 2
+    class: logging.handlers.RotatingFileHandler
+    encoding: utf-8
+    filename: output/logs/error.log
+    formatter: detailed
+    level: ERROR
+    maxBytes: 20480000
+    mode: w
+  info_file:
+    backupCount: 2
+    class: logging.handlers.RotatingFileHandler
+    encoding: utf-8
+    filename: output/logs/info.log
+    formatter: basic
+    level: INFO
+    maxBytes: 20480000
+    mode: w
+  warn_file:
+    backupCount: 2
+    class: logging.handlers.RotatingFileHandler
+    encoding: utf-8
+    filename: output/logs/warning.log
+    formatter: detailed
+    level: WARN
+    maxBytes: 20480000
+    mode: w
+root:
+  handlers:
+  - console
+  - info_file
+  - warn_file
+  - error_file
+  level: DEBUG
+version: 1
