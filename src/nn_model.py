@@ -3,6 +3,7 @@
 
 class MyModel(NNModel):
 """
+import sys
 import time
 import numpy as np
 import logging
@@ -13,6 +14,7 @@ from keras.utils import plot_model, to_categorical
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 
 from src.utils.emoji_dataset import EmojiDataset, Embeddings, build_tokenizer, texts2indexes, y_to_embedding
+from src.utils.utils import MacroF1Classification, MacroF1Regression
 
 
 class NeuralNetworkModel(object):
@@ -143,9 +145,19 @@ class NeuralNetworkModel(object):
         if test_output_file is None:
             test_output_file = "output/eval/" + self.experiment_name + ".test.txt"
 
-        valid_outputs = self.model.predict_classes(self.x_valid)
+        if isinstance(self.macro_f1, MacroF1Classification):
+            valid_outputs = self.model.predict_classes(self.x_valid)
+            test_outputs = self.model.predict_classes(self.x_test)
+        elif isinstance(self.macro_f1, MacroF1Regression):
+            y_pred_valid = self.model.predict(self.x_valid)
+            y_pred_test = self.model.predict(self.x_test)
+            valid_outputs = self.macro_f1.predict_classes(y_pred_valid)
+            test_outputs = self.macro_f1.predict_classes(y_pred_test)
+        else:
+            logging.error("Can't judge classification and vector similarity!")
+            sys.exit(0)
+
         logging.info("valid prediction: {}".format(len(valid_outputs)))
-        test_outputs = self.model.predict_classes(self.x_test)
         logging.info("test prediction: {}".format(len(test_outputs)))
 
         with open(valid_output_file, "w") as fw:
