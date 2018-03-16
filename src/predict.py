@@ -3,13 +3,13 @@ Predict using trained model.
 """
 from src.cls_bilstm import ClassificationBilstmModel
 from src.cls_lstm import ClassificationLstmModel
-from src.reg_bilstm import RegressionBilstmModel
-from src.reg_lstm import RegressionLstmModel
+from src.vs_bilstm import VectorSimilarityBilstmModel
+from src.vs_lstm import VectorSimilarityLstmModel
 
 
 def reg_lstm():
     """ regression 2-layer lstm  """
-    model = RegressionLstmModel()
+    model = VectorSimilarityLstmModel()
     model.load_model(model_path="")
     model.model.summary()
     model.predict()
@@ -17,7 +17,7 @@ def reg_lstm():
 
 def reg_bilstm():
     """ regression bilstm  """
-    model = RegressionBilstmModel()
+    model = VectorSimilarityBilstmModel()
     model.load_model(model_path="")
     model.model.summary()
     model.predict()

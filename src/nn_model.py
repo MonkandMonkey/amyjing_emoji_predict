@@ -14,7 +14,7 @@ from keras.utils import plot_model, to_categorical
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 
 from src.utils.emoji_dataset import EmojiDataset, Embeddings, build_tokenizer, texts2indexes, y_to_embedding
-from src.utils.utils import MacroF1Classification, MacroF1Regression
+from src.utils.utils import ClassificationMacroF1, VecorSimilarityMacroF1
 
 
 class NeuralNetworkModel(object):
@@ -34,7 +34,7 @@ class NeuralNetworkModel(object):
         self.model_file = "output/models/{}.h5".format(self.experiment_name)
         self.model_pic_file = "output/models/{}.png".format(self.experiment_name)
         self.checkpoint_filepath = "output/models/" + self.experiment_name + ".weights-{epoch:02d}-{val_loss:.2f}.hdf5"
-        # set parameters
+        # set common parameters
         self.num_classes = 20
         self.num_words = 58205
         self.max_len = 20

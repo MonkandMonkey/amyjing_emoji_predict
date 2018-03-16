@@ -6,16 +6,16 @@ Different num of LSTM layers may be used.
 import logging
 
 from keras.layers import Activation, Dense
-from keras.layers import Embedding, LSTM, Bidirectional
+from keras.layers import Embedding, LSTM
 
 from keras.models import Sequential
 
 from src.nn_model import NeuralNetworkModel
-from src.utils.utils import MacroF1Classification
+from src.utils.utils import ClassificationMacroF1
 
 
 class ClassificationLstmModel(NeuralNetworkModel):
-    def __init__(self, pretrained_embedding=True):
+    def __init__(self):
         """
         LSTM model.
         Args:
@@ -32,7 +32,7 @@ class ClassificationLstmModel(NeuralNetworkModel):
         self.y_to_categorial()
 
         # compute macro f1 after each epoch
-        self.macro_f1 = MacroF1Classification()
+        self.macro_f1 = ClassificationMacroF1()
 
         logging.info('x_train shape: {}'.format(self.x_train.shape))
         logging.info('y_train shape: {}'.format(self.y_train.shape))

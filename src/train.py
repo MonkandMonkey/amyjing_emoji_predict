@@ -6,13 +6,13 @@ Train regression approach models: 2-layer lstm and bilstm
 
 from src.cls_lstm import ClassificationLstmModel
 from src.cls_bilstm import ClassificationBilstmModel
-from src.reg_bilstm import RegressionBilstmModel
-from src.reg_lstm import RegressionLstmModel
+from src.vs_bilstm import VectorSimilarityBilstmModel
+from src.vs_lstm import VectorSimilarityLstmModel
 
 
-def reg_lstm():
+def vs_lstm():
     """ regression 2-layer lstm model """
-    model = RegressionLstmModel()
+    model = VectorSimilarityLstmModel()
     model.build_model()
     model.plot_model_architecture()
     model.model.summary()
@@ -20,9 +20,9 @@ def reg_lstm():
     model.save_model()
 
 
-def reg_bilstm():
+def vs_bilstm():
     """ regression bilstm model """
-    model = RegressionBilstmModel()
+    model = VectorSimilarityBilstmModel()
     model.build_model()
     model.plot_model_architecture()
     model.model.summary()

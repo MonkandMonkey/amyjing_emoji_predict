@@ -9,7 +9,7 @@ import src.predict as predict
 
 def main():
     config_log()
-    train.reg_lstm()
+    train.vs_lstm()
     # .reg_lstm()
 
 
