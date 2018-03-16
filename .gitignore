@@ -2,6 +2,7 @@
 *.pyc
 .*
 !.gitignore
+data/word2vec/emoji2vec.bin
+data/word2vec/model_swm_300-6-10-low.w2v
+
 # ignore dirs
-
-
