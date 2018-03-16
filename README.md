@@ -3,11 +3,15 @@ AmyJing at SemEval 2018 Task 2: Multilingual Emoji Prediction
 
 # requirements
 python 3
+
 keras >= 2.0.6
+
 tensorflow >= 1.2.1
 
 # usage
-# You need to download the pretrained embeddings and put it under [data/word2vec] dir first.
+
+You need to download the pretrained embeddings and put it under [data/word2vec] dir first.
+
 $ python main.py
 
 model files:
