@@ -7,7 +7,8 @@ keras >= 2.0.6
 tensorflow >= 1.2.1
 
 # usage
-python main.py
+# You need to download the pretrained embeddings and put it under [data/word2vec] dir first.
+$ python main.py
 
 model files:
 - nn_model.py: super class for each model, common experiment settings are here, you can overwrite param settings within each model's class in init.
