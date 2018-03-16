@@ -11,7 +11,7 @@ from keras.layers import Embedding, LSTM, Bidirectional
 from keras.models import Sequential
 
 from src.nn_model import NeuralNetworkModel
-from src.utils.utils import MacroF1Classification
+from src.utils.utils import ClassificationMacroF1
 
 
 class ClassificationBilstmModel(NeuralNetworkModel):
@@ -32,7 +32,7 @@ class ClassificationBilstmModel(NeuralNetworkModel):
         self.y_to_categorial()
 
         # compute macro f1 after each epoch
-        self.macro_f1 = MacroF1Classification()
+        self.macro_f1 = ClassificationMacroF1()
 
         logging.info('x_train shape: {}'.format(self.x_train.shape))
         logging.info('y_train shape: {}'.format(self.y_train.shape))

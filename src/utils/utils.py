@@ -322,7 +322,7 @@ class CheckLoss(keras.callbacks.Callback):
         print("On batch end!", self.model)
 
 
-class MacroF1Classification(keras.callbacks.Callback):
+class ClassificationMacroF1(keras.callbacks.Callback):
     def __init__(self):
         self.macrof1s = 0.
 
@@ -338,7 +338,7 @@ class MacroF1Classification(keras.callbacks.Callback):
         return
 
 
-class MacroF1Regression(keras.callbacks.Callback):
+class VecorSimilarityMacroF1(keras.callbacks.Callback):
     def __init__(self, emoji_embedding_matrix, y_trues):
         """Compute macrof1 for regression model after each epoch.
 
