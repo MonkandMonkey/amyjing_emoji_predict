@@ -145,10 +145,10 @@ class NeuralNetworkModel(object):
         if test_output_file is None:
             test_output_file = "output/eval/" + self.experiment_name + ".test.txt"
 
-        if isinstance(self.macro_f1, MacroF1Classification):
+        if isinstance(self.macro_f1, ClassificationMacroF1):
             valid_outputs = self.model.predict_classes(self.x_valid)
             test_outputs = self.model.predict_classes(self.x_test)
-        elif isinstance(self.macro_f1, MacroF1Regression):
+        elif isinstance(self.macro_f1, VecorSimilarityMacroF1):
             y_pred_valid = self.model.predict(self.x_valid)
             y_pred_test = self.model.predict(self.x_test)
             valid_outputs = self.macro_f1.predict_classes(y_pred_valid)
